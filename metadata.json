@@ -1,0 +1,8 @@
+{
+  "name": "Fat Dumps — Junk Removal",
+  "description": "Local junk removal serving North County San Diego and surrounding areas. Residential cleanouts, furniture & appliance removal, and garage, yard & general junk hauling. Send photos for a free estimate.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

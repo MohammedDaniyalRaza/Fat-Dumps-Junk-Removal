@@ -1,0 +1,842 @@
+/* ===================================================
+   BUTTONS & LINK BUTTONS — Single Source of Truth
+=================================================== */
+.fd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 24px;
+  min-height: 46px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color 180ms var(--ease-out),
+    color 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.fd-btn svg,
+.fd-btn span {
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.fd-btn--sm {
+  padding: 9px 16px;
+  min-height: 40px;
+  font-size: 0.85rem;
+  gap: 7px;
+}
+
+.fd-btn--lg {
+  padding: 16px 30px;
+  min-height: 54px;
+  font-size: 1.02rem;
+}
+
+.fd-btn--full {
+  width: 100%;
+}
+
+.fd-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+
+.fd-btn:disabled,
+.fd-btn[aria-disabled='true'] {
+  opacity: 0.48;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Primary: Lime bg, Black text */
+.fd-btn.fd-btn--primary {
+  background-color: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+}
+
+.fd-btn.fd-btn--primary:hover,
+.fd-btn.fd-btn--primary:focus-visible {
+  background-color: var(--lime-bright);
+  color: #070807;
+  border-color: var(--lime-bright);
+  box-shadow: var(--lime-glow);
+}
+
+/* Dark (on light sections): Black bg, White text -> Lime hover */
+.fd-btn.fd-btn--dark {
+  background-color: #0d0f0d;
+  color: #ffffff;
+  border-color: #0d0f0d;
+}
+
+.fd-btn.fd-btn--dark:hover,
+.fd-btn.fd-btn--dark:focus-visible {
+  background-color: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+}
+
+/* Light (on dark/hero): White bg, Black text -> Lime hover */
+.fd-btn.fd-btn--light {
+  background-color: #ffffff;
+  color: #070807;
+  border-color: #ffffff;
+}
+
+.fd-btn.fd-btn--light:hover,
+.fd-btn.fd-btn--light:focus-visible {
+  background-color: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+}
+
+/* Outline on Dark */
+.fd-btn.fd-btn--outline-dark {
+  background-color: rgba(7, 8, 7, 0.55);
+  color: #ffffff;
+  border-color: rgba(230, 233, 236, 0.55);
+}
+
+.fd-btn.fd-btn--outline-dark:hover,
+.fd-btn.fd-btn--outline-dark:focus-visible {
+  background-color: #ffffff;
+  color: #070807;
+  border-color: #ffffff;
+}
+
+/* Outline on Light */
+.fd-btn.fd-btn--outline-light {
+  background-color: transparent;
+  color: #0d0f0d;
+  border-color: #0d0f0d;
+}
+
+.fd-btn.fd-btn--outline-light:hover,
+.fd-btn.fd-btn--outline-light:focus-visible {
+  background-color: #0d0f0d;
+  color: #ffffff;
+  border-color: #0d0f0d;
+}
+
+/* Metal */
+.fd-btn.fd-btn--metal {
+  background: var(--metal-surface-grad);
+  color: #070807;
+  border-color: #e6e9ec;
+}
+
+.fd-btn.fd-btn--metal:hover,
+.fd-btn.fd-btn--metal:focus-visible {
+  background: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+  box-shadow: var(--lime-glow);
+}
+
+/* Ghost */
+.fd-btn.fd-btn--ghost-dark {
+  background-color: transparent;
+  color: var(--silver-100);
+  border-color: transparent;
+  padding-inline: 8px;
+}
+
+.fd-btn.fd-btn--ghost-dark:hover,
+.fd-btn.fd-btn--ghost-dark:focus-visible {
+  background-color: rgba(132, 224, 27, 0.14);
+  color: var(--lime-bright);
+}
+
+.fd-btn.fd-btn--ghost-light {
+  background-color: transparent;
+  color: #0d0f0d;
+  border-color: transparent;
+  padding-inline: 8px;
+}
+
+.fd-btn.fd-btn--ghost-light:hover,
+.fd-btn.fd-btn--ghost-light:focus-visible {
+  background-color: rgba(13, 15, 13, 0.08);
+  color: #0d0f0d;
+}
+
+/* ===================================================
+   SMART IMAGE & FALLBACK
+=================================================== */
+.fd-img-frame {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-graphite);
+  width: 100%;
+}
+
+.fd-img-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 280ms ease, transform 500ms var(--ease-out);
+}
+
+.fd-img-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    var(--bg-graphite) 20%,
+    var(--bg-charcoal) 48%,
+    var(--bg-graphite) 78%
+  );
+  background-size: 200% 100%;
+  animation: fdShimmer 1.5s infinite linear;
+}
+
+@keyframes fdShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.fd-img-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(132, 224, 27, 0.12), transparent 65%),
+    repeating-linear-gradient(
+      -45deg,
+      #111411,
+      #111411 14px,
+      #161a16 14px,
+      #161a16 28px
+    );
+  color: var(--silver-200);
+}
+
+/* ===================================================
+   CUSTOM INPUTS, TEXTAREA, SELECT, DATEPICKER
+=================================================== */
+.fd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+}
+
+.fd-field-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--silver-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.fd-field-label--light {
+  color: #161916;
+}
+
+.fd-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.fd-input,
+.fd-textarea,
+.fd-select-trigger {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 15px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border-dark-strong);
+  background-color: var(--bg-ink);
+  color: var(--white);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.fd-input::placeholder,
+.fd-textarea::placeholder {
+  color: var(--silver-400);
+}
+
+.fd-input:focus,
+.fd-textarea:focus,
+.fd-select-trigger:focus-visible {
+  outline: none;
+  border-color: var(--lime);
+  box-shadow: 0 0 0 3px rgba(132, 224, 27, 0.22);
+  background-color: #111511;
+}
+
+.fd-input--error,
+.fd-textarea--error {
+  border-color: var(--error);
+}
+
+.fd-textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.fd-field-error {
+  font-size: 0.82rem;
+  color: var(--error);
+  font-weight: 600;
+}
+
+.fd-field-hint {
+  font-size: 0.82rem;
+  color: var(--silver-300);
+}
+
+/* Custom Dropdown / Select */
+.fd-select {
+  position: relative;
+  width: 100%;
+}
+
+.fd-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fd-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 270px;
+  overflow-y: auto;
+  background-color: #141814;
+  border: 1.5px solid var(--border-dark-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-deep);
+  padding: 6px;
+}
+
+.fd-select-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  min-height: 42px;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--silver-100);
+  font-size: 0.94rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.fd-select-option:hover,
+.fd-select-option[data-highlighted='true'] {
+  background-color: rgba(132, 224, 27, 0.14);
+  color: var(--lime-bright);
+}
+
+.fd-select-option[aria-selected='true'] {
+  background-color: var(--lime);
+  color: #070807;
+  font-weight: 700;
+}
+
+/* ===================================================
+   CHIP / FILTER / TOGGLE BUTTONS
+=================================================== */
+.fd-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.fd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 8px 15px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border-dark-strong);
+  background-color: var(--bg-ink);
+  color: var(--silver-100);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.fd-chip:hover {
+  border-color: var(--lime);
+  color: var(--white);
+}
+
+.fd-chip[aria-pressed='true'],
+.fd-chip[data-active='true'] {
+  background-color: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+  font-weight: 700;
+}
+
+.surface-light .fd-chip {
+  background-color: #ffffff;
+  color: #0d0f0d;
+  border-color: rgba(13, 15, 13, 0.22);
+}
+
+.surface-light .fd-chip:hover {
+  border-color: #0d0f0d;
+  background-color: #e9ece6;
+}
+
+.surface-light .fd-chip[aria-pressed='true'],
+.surface-light .fd-chip[data-active='true'] {
+  background-color: #0d0f0d;
+  color: var(--lime);
+  border-color: #0d0f0d;
+}
+
+/* ===================================================
+   CUSTOM CALENDAR DATE PICKER
+=================================================== */
+.fd-calendar {
+  margin-top: 10px;
+  background-color: var(--bg-ink);
+  border: 1px solid var(--border-dark-strong);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  max-width: 340px;
+}
+
+.fd-calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fd-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.fd-calendar-dow {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--silver-300);
+  padding-bottom: 6px;
+}
+
+.fd-calendar-day {
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--silver-100);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.fd-calendar-day:hover:not(:disabled) {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.fd-calendar-day[aria-selected='true'] {
+  background-color: var(--lime);
+  color: #070807;
+  font-weight: 700;
+}
+
+.fd-calendar-day:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+/* ===================================================
+   ACCORDION
+=================================================== */
+.fd-accordion-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-dark);
+}
+
+.surface-light .fd-accordion-list {
+  border-top-color: var(--border-light);
+}
+
+.fd-accordion-item {
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.surface-light .fd-accordion-item {
+  border-bottom-color: var(--border-light);
+}
+
+.fd-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 4px;
+  min-height: 58px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+  line-height: 1.3;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.fd-accordion-trigger:hover {
+  color: var(--lime);
+}
+
+.surface-light .fd-accordion-trigger:hover {
+  color: var(--green-deep);
+}
+
+.fd-accordion-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-dark-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 240ms var(--ease-out), background-color 200ms ease, color 200ms ease;
+}
+
+.surface-light .fd-accordion-icon {
+  border-color: var(--border-light);
+}
+
+.fd-accordion-trigger[aria-expanded='true'] .fd-accordion-icon {
+  background-color: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+  transform: rotate(45deg);
+}
+
+.fd-accordion-panel {
+  overflow: hidden;
+  padding: 0 4px 22px;
+  color: var(--silver-200);
+  max-width: 72ch;
+}
+
+.surface-light .fd-accordion-panel {
+  color: var(--muted-on-light);
+}
+
+/* ===================================================
+   BEFORE / AFTER SLIDER
+=================================================== */
+.fd-ba {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-dark-strong);
+  user-select: none;
+  touch-action: pan-y;
+  background: var(--bg-ink);
+}
+
+.fd-ba-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fd-ba-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--lime);
+  box-shadow: 0 0 14px rgba(132, 224, 27, 0.7);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.fd-ba-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--lime);
+  color: #070807;
+  border: 2px solid #070807;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8;
+  cursor: ew-resize;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.fd-ba-badge {
+  position: absolute;
+  top: 14px;
+  z-index: 5;
+  padding: 6px 11px;
+  border-radius: var(--radius-xs);
+  background: rgba(7, 8, 7, 0.85);
+  color: var(--white);
+  border: 1px solid rgba(230, 233, 236, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   PHOTO DROPZONE
+=================================================== */
+.fd-dropzone {
+  border: 2px dashed rgba(132, 224, 27, 0.45);
+  border-radius: var(--radius-md);
+  background: linear-gradient(160deg, rgba(22, 25, 22, 0.9), rgba(13, 15, 13, 0.95));
+  padding: clamp(22px, 4vw, 38px);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.fd-dropzone:hover,
+.fd-dropzone[data-dragging='true'] {
+  border-color: var(--lime-bright);
+  box-shadow: var(--lime-glow);
+}
+
+.fd-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.fd-photo-thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-dark-strong);
+  background: var(--bg-ink);
+}
+
+.fd-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fd-photo-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(7, 8, 7, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fd-photo-remove:hover {
+  background: var(--error);
+  color: #ffffff;
+}
+
+/* ===================================================
+   LIGHTBOX (Portal over document.body)
+=================================================== */
+.fd-lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: var(--z-lightbox);
+  background: rgba(7, 8, 7, 0.96);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.fd-lightbox-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(12px + env(safe-area-inset-top, 0px)) clamp(16px, 3vw, 28px) 12px;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.fd-lightbox-stage {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 3vw, 32px);
+  overflow: hidden;
+}
+
+.fd-lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-xs);
+  user-select: none;
+  transition: transform 220ms var(--ease-out);
+}
+
+.fd-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(13, 15, 13, 0.92);
+  color: #ffffff;
+  border: 1.5px solid rgba(230, 233, 236, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.fd-lightbox-arrow:hover {
+  background: var(--lime);
+  color: #070807;
+  border-color: var(--lime);
+}
+
+.fd-lightbox-arrow--prev {
+  left: 16px;
+}
+
+.fd-lightbox-arrow--next {
+  right: 16px;
+}
+
+@media (max-width: 767px) {
+  .fd-lightbox-arrow--desktop {
+    display: none;
+  }
+}
+
+.fd-lightbox-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px clamp(16px, 3vw, 28px) calc(14px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border-dark);
+  background: rgba(13, 15, 13, 0.94);
+}
+
+.fd-lightbox-thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+@media (max-height: 540px) {
+  .fd-lightbox-thumbs {
+    display: none;
+  }
+}
+
+.fd-lightbox-thumb-btn {
+  width: 56px;
+  height: 42px;
+  flex-shrink: 0;
+  padding: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: var(--bg-ink);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.fd-lightbox-thumb-btn[aria-current='true'] {
+  border-color: var(--lime);
+  opacity: 1;
+}
+
+.fd-lightbox-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

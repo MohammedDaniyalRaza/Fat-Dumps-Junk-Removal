@@ -1,0 +1,94 @@
+:root {
+  /* Core Surfaces */
+  --bg-black: #070807;
+  --bg-ink: #0d0f0d;
+  --bg-graphite: #161916;
+  --bg-charcoal: #202420;
+  --bg-elevated: #1c201c;
+
+  /* Light Contrast Surfaces */
+  --white: #ffffff;
+  --off-white: #f2f4f0;
+  --off-white-alt: #e7eae4;
+  --ink-on-light: #0d0f0d;
+  --muted-on-light: #495049;
+
+  /* Metallic Silver Scale */
+  --silver-100: #e6e9ec;
+  --silver-200: #b9bec4;
+  --silver-300: #8b9096;
+  --silver-400: #5e6368;
+
+  /* Lime Action & Brand Greens */
+  --lime: #84e01b;
+  --lime-bright: #a6f23a;
+  --green-deep: #3e8f00;
+  --green-banner: #2f7a12;
+
+  /* Semantic & Hairlines */
+  --border-dark: rgba(230, 233, 236, 0.12);
+  --border-dark-strong: rgba(230, 233, 236, 0.24);
+  --border-light: rgba(13, 15, 13, 0.14);
+  --border-lime: rgba(132, 224, 27, 0.45);
+  --error: #ff5c5c;
+  --error-bg: rgba(255, 92, 92, 0.12);
+  --success: #84e01b;
+
+  /* Metallic Gradients & Glows */
+  --metal-text-grad: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e6e9ec 32%,
+    #9ca2a9 56%,
+    #d7dce1 78%,
+    #777d84 100%
+  );
+  --metal-surface-grad: linear-gradient(
+    135deg,
+    #f2f4f7 0%,
+    #c4c9cf 38%,
+    #9499a0 65%,
+    #dce0e4 100%
+  );
+  --lime-glow: 0 0 28px rgba(132, 224, 27, 0.28);
+  --lime-glow-strong: 0 0 42px rgba(166, 242, 58, 0.4);
+  --shadow-deep: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.42);
+
+  /* Typography */
+  --font-display: 'Unbounded', sans-serif;
+  --font-serif: 'Young Serif', serif;
+  --font-hand: 'Caveat', cursive;
+  --font-body: 'Familjen Grotesk', sans-serif;
+  --font-mono: 'Chivo Mono', monospace;
+
+  /* Spacing & Layout */
+  --container-max: 1320px;
+  --container-pad: clamp(16px, 4vw, 48px);
+  --section-py: clamp(64px, 8vw, 128px);
+  --nav-height: 76px;
+  --nav-height-mobile: 64px;
+  --mobile-bar-height: 58px;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Z-index Scale */
+  --z-base: 1;
+  --z-sticky: 40;
+  --z-nav: 80;
+  --z-megamenu: 85;
+  --z-mobile-bar: 90;
+  --z-mobile-menu: 110;
+  --z-modal: 200;
+  --z-lightbox: 900;
+  --z-preloader: 1000;
+  --z-cursor: 1100;
+}
